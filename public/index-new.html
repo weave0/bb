@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BBrown Global Strategy Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles-new.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <!-- Modern Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <svg class="brand-logo" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="18" fill="#0D47A1" opacity="0.1" />
+            <path
+              d="M15 12h10a3 3 0 013 3v10a3 3 0 01-3 3H15a3 3 0 01-3-3V15a3 3 0 013-3z"
+              fill="#0D47A1"
+            />
+            <circle cx="20" cy="20" r="4" fill="#fff" />
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">BBrown</span>
+            <span class="brand-tagline">Global Strategy Platform</span>
+          </div>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="#" class="nav-link active" data-page="overview"
+              >Overview</a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-page="coverage">Coverage</a>
+          </li>
+          <li><a href="#" class="nav-link" data-page="markets">Markets</a></li>
+          <li>
+            <a href="#" class="nav-link" data-page="insights">Insights</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-container">
+        <h1 class="hero-title">Strategic Globalization Intelligence</h1>
+        <p class="hero-description">
+          Comprehensive language coverage analysis and market expansion planning
+          for global success
+        </p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="hero-markets">--</div>
+            <div class="hero-stat-label">Global Markets</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="hero-languages">--</div>
+            <div class="hero-stat-label">Languages</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="hero-coverage">--</div>
+            <div class="hero-stat-label">Avg Coverage</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="hero-employees">--</div>
+            <div class="hero-stat-label">Team Members</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main-container">
+      <!-- Overview Page -->
+      <section id="overview-page" class="page active">
+        <div class="section-header">
+          <h2 class="section-title">Executive Overview</h2>
+          <p class="section-description">
+            Real-time insights into organizational capabilities and market
+            readiness
+          </p>
+        </div>
+
+        <!-- Key Metrics Cards -->
+        <div class="metrics-grid">
+          <div class="metric-card card-primary">
+            <div class="metric-header">
+              <svg
+                class="metric-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"
+                  stroke-width="2"
+                />
+                <circle cx="12" cy="10" r="3" stroke-width="2" />
+              </svg>
+              <span class="metric-label">Market Coverage</span>
+            </div>
+            <div class="metric-value" id="market-coverage-value">--</div>
+            <div class="metric-trend positive">
+              <span class="trend-arrow">↑</span>
+              <span class="trend-text">12% vs last quarter</span>
+            </div>
+          </div>
+
+          <div class="metric-card card-success">
+            <div class="metric-header">
+              <svg
+                class="metric-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"
+                  stroke-width="2"
+                />
+                <circle cx="9" cy="7" r="4" stroke-width="2" />
+                <path
+                  d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
+                  stroke-width="2"
+                />
+              </svg>
+              <span class="metric-label">Language Proficiency</span>
+            </div>
+            <div class="metric-value" id="proficiency-value">--</div>
+            <div class="metric-trend positive">
+              <span class="trend-arrow">↑</span>
+              <span class="trend-text">8% improvement</span>
+            </div>
+          </div>
+
+          <div class="metric-card card-warning">
+            <div class="metric-header">
+              <svg
+                class="metric-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+                  stroke-width="2"
+                />
+                <line x1="12" y1="9" x2="12" y2="13" stroke-width="2" />
+                <line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2" />
+              </svg>
+              <span class="metric-label">Coverage Gaps</span>
+            </div>
+            <div class="metric-value" id="gaps-value">--</div>
+            <div class="metric-trend neutral">
+              <span class="trend-text">Requires attention</span>
+            </div>
+          </div>
+
+          <div class="metric-card card-info">
+            <div class="metric-header">
+              <svg
+                class="metric-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                  stroke-width="2"
+                />
+              </svg>
+              <span class="metric-label">Expansion Opportunities</span>
+            </div>
+            <div class="metric-value" id="opportunities-value">--</div>
+            <div class="metric-trend positive">
+              <span class="trend-text">High potential markets</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Charts -->
+        <div class="charts-container">
+          <div class="chart-panel">
+            <div class="chart-header">
+              <h3 class="chart-title">Regional Language Coverage</h3>
+              <select class="chart-filter" id="region-filter">
+                <option value="all">All Regions</option>
+                <option value="americas">Americas</option>
+                <option value="emea">EMEA</option>
+                <option value="apac">APAC</option>
+              </select>
+            </div>
+            <div class="chart-body">
+              <canvas id="coverage-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-panel">
+            <div class="chart-header">
+              <h3 class="chart-title">Market Priority Distribution</h3>
+            </div>
+            <div class="chart-body">
+              <canvas id="priority-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Language Heatmap -->
+        <div class="viz-panel">
+          <div class="viz-header">
+            <h3 class="viz-title">
+              Organizational Language Proficiency Matrix
+            </h3>
+            <div class="viz-legend">
+              <span class="legend-item"
+                ><span class="legend-color" style="background: #ef4444"></span
+                >Basic</span
+              >
+              <span class="legend-item"
+                ><span class="legend-color" style="background: #f59e0b"></span
+                >Intermediate</span
+              >
+              <span class="legend-item"
+                ><span class="legend-color" style="background: #3b82f6"></span
+                >Professional</span
+              >
+              <span class="legend-item"
+                ><span class="legend-color" style="background: #6366f1"></span
+                >Fluent</span
+              >
+              <span class="legend-item"
+                ><span class="legend-color" style="background: #10b981"></span
+                >Native</span
+              >
+            </div>
+          </div>
+          <div class="viz-body" id="heatmap-container"></div>
+        </div>
+      </section>
+
+      <!-- Coverage Analysis Page -->
+      <section id="coverage-page" class="page">
+        <div class="section-header">
+          <h2 class="section-title">Language Coverage Analysis</h2>
+          <p class="section-description">
+            Detailed breakdown of language capabilities across all departments
+          </p>
+        </div>
+
+        <div class="coverage-grid" id="coverage-grid"></div>
+
+        <div class="chart-panel">
+          <div class="chart-header">
+            <h3 class="chart-title">Proficiency Level Distribution</h3>
+          </div>
+          <div class="chart-body">
+            <canvas id="proficiency-dist-chart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Markets Page -->
+      <section id="markets-page" class="page">
+        <div class="section-header">
+          <h2 class="section-title">Market Expansion Opportunities</h2>
+          <p class="section-description">
+            Strategic insights for global market entry and growth
+          </p>
+        </div>
+
+        <div class="viz-panel">
+          <div class="viz-header">
+            <h3 class="viz-title">Opportunity vs. Current Coverage Matrix</h3>
+            <p class="viz-subtitle">
+              Bubble size represents market GDP • Color indicates priority level
+            </p>
+          </div>
+          <div class="viz-body" id="opportunity-matrix"></div>
+        </div>
+
+        <div class="markets-list" id="markets-list"></div>
+      </section>
+
+      <!-- Insights Page -->
+      <section id="insights-page" class="page">
+        <div class="section-header">
+          <h2 class="section-title">Strategic Recommendations</h2>
+          <p class="section-description">
+            Data-driven insights and actionable next steps
+          </p>
+        </div>
+
+        <div class="insights-grid" id="insights-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <strong>BBrown Global Strategy Platform</strong>
+          <p>Strategic globalization consulting and language intelligence</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.bbrown.com/us/">Visit BBrown.com</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app-new.js"></script>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBrown Global Strategy Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <!-- Hero Header -->
+    <header class="hero">
+        <div class="hero-background"></div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <svg class="brand-icon" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 5L35 12.5V27.5L20 35L5 27.5V12.5L20 5Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="20" cy="20" r="8" fill="currentColor"/>
+                    </svg>
+                    <span class="brand-text">BBrown <span class="brand-sub">Global Strategy</span></span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#overview" class="nav-link active" data-page="overview">Overview</a></li>
+                    <li><a href="#coverage" class="nav-link" data-page="coverage">Coverage Analysis</a></li>
+                    <li><a href="#markets" class="nav-link" data-page="markets">Market Opportunities</a></li>
+                    <li><a href="#recommendations" class="nav-link" data-page="recommendations">Recommendations</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Strategic Globalization Intelligence</h1>
+                <p class="hero-subtitle">Data-driven insights for language coverage, market expansion, and organizational readiness</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Overview Page -->
+        <section id="overview-page" class="page active">
+            <div class="page-inner">
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">🌍</div>
+            <div class="stat-content">
+              <div class="stat-label">Markets Covered</div>
+              <div class="stat-value" id="markets-count">0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🗣️</div>
+            <div class="stat-content">
+              <div class="stat-label">Languages Supported</div>
+              <div class="stat-value" id="languages-count">0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-content">
+              <div class="stat-label">Avg Coverage</div>
+              <div class="stat-value" id="avg-coverage">0%</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-content">
+              <div class="stat-label">Coverage Gaps</div>
+              <div class="stat-value" id="gaps-count">0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>Language Coverage by Region</h3>
+            <canvas id="coverage-chart"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Market Distribution</h3>
+            <canvas id="market-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card full-width">
+          <h3>Language Proficiency Heatmap</h3>
+          <div id="heatmap"></div>
+        </div>
+      </section>
+
+      <!-- Organizations Page -->
+      <section id="organizations-page" class="page">
+        <div class="page-header">
+          <h2>Organization Mapping</h2>
+          <p>Visual organizational structure and language capabilities</p>
+        </div>
+
+        <div class="org-controls">
+          <select id="org-selector" class="form-select">
+            <option value="">Select Organization...</option>
+          </select>
+        </div>
+
+        <div id="org-map" class="org-visualization"></div>
+
+        <div class="org-details" id="org-details">
+          <h3>Department Details</h3>
+          <div id="dept-list"></div>
+        </div>
+      </section>
+
+      <!-- Languages Page -->
+      <section id="languages-page" class="page">
+        <div class="page-header">
+          <h2>Language Analysis</h2>
+          <p>Comprehensive language coverage and proficiency tracking</p>
+        </div>
+
+        <div class="language-grid" id="language-grid"></div>
+
+        <div class="chart-card">
+          <h3>Language Proficiency Distribution</h3>
+          <canvas id="proficiency-chart"></canvas>
+        </div>
+      </section>
+
+      <!-- Markets Page -->
+      <section id="markets-page" class="page">
+        <div class="page-header">
+          <h2>Market Expansion Opportunities</h2>
+          <p>Strategic insights for global market entry and expansion</p>
+        </div>
+
+        <div id="opportunity-matrix" class="matrix-visualization"></div>
+
+        <div class="market-list" id="market-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        &copy; 2025 BBrown Strategic Globalization Platform. All rights
+        reserved.
+      </p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
