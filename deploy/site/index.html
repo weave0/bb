@@ -28,6 +28,7 @@
                     <li><a href="#overview" class="nav-link active" data-page="overview">Overview</a></li>
                     <li><a href="#coverage" class="nav-link" data-page="coverage">Coverage Analysis</a></li>
                     <li><a href="#markets" class="nav-link" data-page="markets">Market Opportunities</a></li>
+                    <li><a href="#enterprise" class="nav-link" data-page="enterprise">Enterprise Planning</a></li>
                     <li><a href="#recommendations" class="nav-link" data-page="recommendations">Recommendations</a></li>
                 </ul>
             </div>
@@ -174,6 +175,60 @@
         <div id="opportunity-matrix" class="matrix-visualization"></div>
 
         <div class="market-list" id="market-list"></div>
+      </section>
+
+      <!-- Enterprise Planning Page -->
+      <section id="enterprise-page" class="page">
+        <div class="page-header">
+          <h2>Enterprise Planning & Compliance</h2>
+          <p>Workforce forecasting, regulatory compliance, and expansion timelines</p>
+        </div>
+
+        <!-- Compliance Dashboard -->
+        <div class="compliance-section">
+          <h3>🛡️ Global Compliance Tracker</h3>
+          <div id="compliance-grid" class="compliance-grid"></div>
+        </div>
+
+        <!-- Workforce Planning -->
+        <div class="workforce-section">
+          <h3>👥 Workforce Growth Projection</h3>
+          <div class="workforce-chart-container">
+            <canvas id="workforce-chart"></canvas>
+          </div>
+          <div class="workforce-needs" id="workforce-needs"></div>
+        </div>
+
+        <!-- Expansion Timeline -->
+        <div class="timeline-section">
+          <h3>📅 Market Expansion Timeline</h3>
+          <div class="timeline-controls">
+            <select id="timeline-market" class="form-select">
+              <option value="Brazil">Brazil Expansion</option>
+              <option value="India">India Entry (Future)</option>
+              <option value="China">China Strategy (Future)</option>
+            </select>
+          </div>
+          <div id="expansion-timeline" class="expansion-timeline"></div>
+        </div>
+
+        <!-- Sensitivity Analysis -->
+        <div class="sensitivity-section">
+          <h3>📊 Cost-Benefit Sensitivity Analysis</h3>
+          <div class="sensitivity-controls">
+            <div class="slider-group">
+              <label>Hiring Cost Variation: <span id="hire-variance">±15%</span></label>
+              <input type="range" id="hire-slider" min="0" max="30" value="15" class="sensitivity-slider">
+            </div>
+            <div class="slider-group">
+              <label>Revenue Impact: <span id="revenue-variance">12%</span></label>
+              <input type="range" id="revenue-slider" min="5" max="25" value="12" class="sensitivity-slider">
+            </div>
+          </div>
+          <div class="sensitivity-results">
+            <canvas id="sensitivity-chart"></canvas>
+          </div>
+        </div>
       </section>
 
       <!-- Recommendations Page -->

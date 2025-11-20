@@ -371,6 +371,96 @@ const sampleData = {
     },
   ],
 
+  complianceRequirements: [
+    {
+      market: "EU",
+      requirement: "GDPR Data Protection",
+      status: "compliant",
+      deadline: "2025-05-25",
+      languages: ["en", "de", "fr", "it", "es"],
+      priority: "critical"
+    },
+    {
+      market: "China",
+      requirement: "Cybersecurity Law",
+      status: "in-progress",
+      deadline: "2026-01-01",
+      languages: ["zh"],
+      priority: "high"
+    },
+    {
+      market: "Brazil",
+      requirement: "LGPD Compliance",
+      status: "planning",
+      deadline: "2026-06-30",
+      languages: ["pt"],
+      priority: "high"
+    },
+    {
+      market: "India",
+      requirement: "DPDP Act 2023",
+      status: "pending",
+      deadline: "2026-12-31",
+      languages: ["hi", "en"],
+      priority: "medium"
+    }
+  ],
+
+  workforcePlanning: {
+    currentHeadcount: 450,
+    projectedGrowth: {
+      "2026": { total: 520, byRegion: { "NA": 100, "EMEA": 195, "APAC": 155, "LATAM": 70 } },
+      "2027": { total: 610, byRegion: { "NA": 115, "EMEA": 230, "APAC": 185, "LATAM": 80 } },
+      "2028": { total: 720, byRegion: { "NA": 130, "EMEA": 270, "APAC": 220, "LATAM": 100 } }
+    },
+    languageNeeds: [
+      { language: "Mandarin", current: 52, needed2026: 75, needed2027: 95, cost: 85000 },
+      { language: "Spanish", current: 93, needed2026: 110, needed2027: 130, cost: 72000 },
+      { language: "Portuguese", current: 18, needed2026: 35, needed2027: 50, cost: 68000 },
+      { language: "Hindi", current: 8, needed2026: 25, needed2027: 40, cost: 55000 },
+      { language: "Arabic", current: 15, needed2026: 30, needed2027: 45, cost: 78000 }
+    ]
+  },
+
+  expansionTimeline: [
+    {
+      phase: "Market Research",
+      market: "Brazil",
+      startDate: "2026-01-01",
+      endDate: "2026-03-31",
+      status: "planned",
+      milestones: ["Market analysis", "Competitor research", "Regulatory review"],
+      budget: 50000
+    },
+    {
+      phase: "Team Building",
+      market: "Brazil",
+      startDate: "2026-04-01",
+      endDate: "2026-06-30",
+      status: "planned",
+      milestones: ["Hire 5 PT speakers", "Training program", "Office setup"],
+      budget: 180000
+    },
+    {
+      phase: "Soft Launch",
+      market: "Brazil",
+      startDate: "2026-07-01",
+      endDate: "2026-09-30",
+      status: "planned",
+      milestones: ["Pilot clients", "Process optimization", "Feedback integration"],
+      budget: 75000
+    },
+    {
+      phase: "Full Operations",
+      market: "Brazil",
+      startDate: "2026-10-01",
+      endDate: "2027-12-31",
+      status: "planned",
+      milestones: ["Scale to 20 clients", "Expand team", "Regional partnerships"],
+      budget: 450000
+    }
+  ],
+
   coverageGaps: [
     {
       market: "China",

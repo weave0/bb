@@ -22,6 +22,11 @@ function initializeApp() {
   populateROISelects();
   renderBenchmarks();
   renderRiskMatrix();
+  renderComplianceGrid();
+  renderWorkforceChart();
+  renderWorkforceNeeds();
+  renderExpansionTimeline();
+  initializeSensitivityAnalysis();
 }
 
 // Search and Filter Functionality
@@ -51,13 +56,15 @@ function initializeSearchAndFilters() {
 }
 
 function applyFilters() {
-  const searchTerm = document.getElementById("search-input")?.value.toLowerCase() || "";
+  const searchTerm =
+    document.getElementById("search-input")?.value.toLowerCase() || "";
   const region = document.getElementById("region-filter")?.value || "all";
   const priority = document.getElementById("priority-filter")?.value || "all";
 
-  filteredData.markets = sampleData.markets.filter(market => {
-    const matchesSearch = market.name.toLowerCase().includes(searchTerm) ||
-                         market.region.toLowerCase().includes(searchTerm);
+  filteredData.markets = sampleData.markets.filter((market) => {
+    const matchesSearch =
+      market.name.toLowerCase().includes(searchTerm) ||
+      market.region.toLowerCase().includes(searchTerm);
     const matchesRegion = region === "all" || market.region === region;
     const matchesPriority = priority === "all" || market.priority === priority;
 
@@ -70,17 +77,18 @@ function applyFilters() {
 
 function exportToCSV() {
   const markets = filteredData.markets;
-  let csv = "Market,Region,Population,GDP (Billions),Coverage Score,Priority,Opportunity,Competition\\n";
+  let csv =
+    "Market,Region,Population,GDP (Billions),Coverage Score,Priority,Opportunity,Competition\\n";
 
-  markets.forEach(market => {
+  markets.forEach((market) => {
     csv += `"${market.name}","${market.region}",${market.population},${market.gdp},${market.coverageScore},${market.priority},${market.opportunity},${market.competition}\\n`;
   });
 
-  const blob = new Blob([csv], { type: 'text/csv' });
+  const blob = new Blob([csv], { type: "text/csv" });
   const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = `bbrown-markets-${new Date().toISOString().split('T')[0]}.csv`;
+  a.download = `bbrown-markets-${new Date().toISOString().split("T")[0]}.csv`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -93,7 +101,7 @@ function populateROISelects() {
   const languageSelect = document.getElementById("roi-language");
 
   if (marketSelect) {
-    sampleData.markets.forEach(market => {
+    sampleData.markets.forEach((market) => {
       const option = document.createElement("option");
       option.value = market.id;
       option.textContent = market.name;
@@ -102,7 +110,7 @@ function populateROISelects() {
   }
 
   if (languageSelect) {
-    sampleData.languages.forEach(lang => {
+    sampleData.languages.forEach((lang) => {
       const option = document.createElement("option");
       option.value = lang.code;
       option.textContent = lang.name;
@@ -124,29 +132,35 @@ function calculateROI() {
   const hires = parseInt(document.getElementById("roi-hires").value);
   const salary = parseInt(document.getElementById("roi-salary").value);
   const training = parseInt(document.getElementById("roi-training").value);
-  const revenueIncrease = parseInt(document.getElementById("roi-revenue").value);
+  const revenueIncrease = parseInt(
+    document.getElementById("roi-revenue").value
+  );
 
   if (!marketId || !languageCode) {
     alert("Please select a market and language");
     return;
   }
 
-  const market = sampleData.markets.find(m => m.id === marketId);
-  const estimatedMarketRevenue = (market.gdp * 1000000) * 0.0001; // Rough estimate
+  const market = sampleData.markets.find((m) => m.id === marketId);
+  const estimatedMarketRevenue = market.gdp * 1000000 * 0.0001; // Rough estimate
 
-  const totalCost = (hires * salary * 1000) + (training * 1000);
+  const totalCost = hires * salary * 1000 + training * 1000;
   const annualReturn = estimatedMarketRevenue * (revenueIncrease / 100);
   const paybackMonths = Math.ceil((totalCost / annualReturn) * 12);
   const threeYearROI = ((annualReturn * 3 - totalCost) / totalCost) * 100;
 
-  document.getElementById("roi-total-cost").textContent = 
-    `$${(totalCost / 1000).toFixed(0)}K`;
-  document.getElementById("roi-annual-return").textContent = 
-    `$${(annualReturn / 1000).toFixed(0)}K`;
-  document.getElementById("roi-payback").textContent = 
-    `${paybackMonths} months`;
-  document.getElementById("roi-three-year").textContent = 
-    `${threeYearROI.toFixed(0)}%`;
+  document.getElementById("roi-total-cost").textContent = `$${(
+    totalCost / 1000
+  ).toFixed(0)}K`;
+  document.getElementById("roi-annual-return").textContent = `$${(
+    annualReturn / 1000
+  ).toFixed(0)}K`;
+  document.getElementById(
+    "roi-payback"
+  ).textContent = `${paybackMonths} months`;
+  document.getElementById(
+    "roi-three-year"
+  ).textContent = `${threeYearROI.toFixed(0)}%`;
 
   document.getElementById("roi-results").classList.remove("hidden");
 }
@@ -160,7 +174,9 @@ function renderGapsList() {
     .sort((a, b) => b.gap - a.gap)
     .slice(0, 6);
 
-  container.innerHTML = gaps.map(gap => `
+  container.innerHTML = gaps
+    .map(
+      (gap) => `
     <div class="gap-card ${gap.impact}">
       <div class="gap-header">
         <div class="gap-title">${gap.market} - ${gap.language}</div>
@@ -184,9 +200,10 @@ function renderGapsList() {
         <strong>Recommendation:</strong> ${gap.recommendation}
       </div>
     </div>
-  `).join('');
+  `
+    )
+    .join("");
 }
-
 
 function initializeNavigation() {
   const navLinks = document.querySelectorAll(".nav-link");
@@ -837,7 +854,7 @@ function renderBenchmarks() {
   const avgCoverage = calculateOverallCoverage();
   const scoreEl = document.getElementById("org-score");
   const barEl = document.getElementById("org-bar");
-  
+
   if (scoreEl) scoreEl.textContent = avgCoverage + "%";
   if (barEl) barEl.style.width = avgCoverage + "%";
 }
@@ -848,31 +865,304 @@ function renderRiskMatrix() {
   if (!container) return;
 
   const risks = [
-    { name: "China - Language Gap", level: "critical", impact: 3, probability: 3 },
+    {
+      name: "China - Language Gap",
+      level: "critical",
+      impact: 3,
+      probability: 3,
+    },
     { name: "EU Compliance", level: "high", impact: 3, probability: 2 },
     { name: "Cultural Barriers", level: "medium", impact: 3, probability: 1 },
-    { name: "Brazil - Talent Shortage", level: "high", impact: 2, probability: 3 },
-    { name: "India - Infrastructure", level: "medium", impact: 2, probability: 2 },
+    {
+      name: "Brazil - Talent Shortage",
+      level: "high",
+      impact: 2,
+      probability: 3,
+    },
+    {
+      name: "India - Infrastructure",
+      level: "medium",
+      impact: 2,
+      probability: 2,
+    },
     { name: "Tech Integration", level: "low", impact: 2, probability: 1 },
-    { name: "Marketing Adaptation", level: "medium", impact: 1, probability: 3 },
+    {
+      name: "Marketing Adaptation",
+      level: "medium",
+      impact: 1,
+      probability: 3,
+    },
     { name: "Time Zone Coordination", level: "low", impact: 1, probability: 2 },
     { name: "Currency Fluctuation", level: "low", impact: 1, probability: 1 },
   ];
 
   for (let impact = 3; impact >= 1; impact--) {
     for (let probability = 1; probability <= 3; probability++) {
-      const risk = risks.find(r => r.impact === impact && r.probability === probability);
+      const risk = risks.find(
+        (r) => r.impact === impact && r.probability === probability
+      );
       const cell = document.createElement("div");
       cell.className = `risk-cell ${risk ? risk.level : "low"}`;
-      
+
       if (risk) {
         cell.innerHTML = `<div class="risk-item">${risk.name}</div>`;
-        const impactLabel = impact === 3 ? "High" : impact === 2 ? "Medium" : "Low";
-        const probLabel = probability === 3 ? "High" : probability === 2 ? "Medium" : "Low";
+        const impactLabel =
+          impact === 3 ? "High" : impact === 2 ? "Medium" : "Low";
+        const probLabel =
+          probability === 3 ? "High" : probability === 2 ? "Medium" : "Low";
         cell.title = `\nImpact: ${impactLabel}\nProbability: ${probLabel}`;
       }
-      
+
       container.appendChild(cell);
     }
   }
+}
+
+// Compliance Grid
+function renderComplianceGrid() {
+  const container = document.getElementById('compliance-grid');
+  if (!container) return;
+
+  const compliance = sampleData.complianceRequirements || [];
+  
+  container.innerHTML = compliance.map(item => `
+    <div class=`compliance-card ${item.status}`>
+      <div class=`compliance-header`>
+        <div class=`compliance-title`>${item.requirement}</div>
+        <span class=`compliance-status`>${item.status.replace('-', ' ')}</span>
+      </div>
+      <div class=`compliance-market`>📍 ${item.market}</div>
+      <div class=`compliance-deadline`>
+        📅 Deadline: ${new Date(item.deadline).toLocaleDateString()}
+      </div>
+      <div class=`compliance-languages`>
+        ${item.languages.map(lang => `<span class=`lang-tag`>${lang.toUpperCase()}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Workforce Chart
+function renderWorkforceChart() {
+  const ctx = document.getElementById('workforce-chart');
+  if (!ctx) return;
+
+  const planning = sampleData.workforcePlanning;
+  if (!planning) return;
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Current', '2026', '2027', '2028'],
+      datasets: [
+        {
+          label: 'North America',
+          data: [100, 100, 115, 130],
+          borderColor: '#0ea5e9',
+          backgroundColor: 'rgba(14, 165, 233, 0.1)',
+          fill: true,
+          tension: 0.4
+        },
+        {
+          label: 'EMEA',
+          data: [165, 195, 230, 270],
+          borderColor: '#8b5cf6',
+          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+          fill: true,
+          tension: 0.4
+        },
+        {
+          label: 'APAC',
+          data: [120, 155, 185, 220],
+          borderColor: '#10b981',
+          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+          fill: true,
+          tension: 0.4
+        },
+        {
+          label: 'LATAM',
+          data: [65, 70, 80, 100],
+          borderColor: '#f59e0b',
+          backgroundColor: 'rgba(245, 158, 11, 0.1)',
+          fill: true,
+          tension: 0.4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Regional Headcount Growth Forecast'
+        },
+        legend: {
+          position: 'bottom'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Employees'
+          }
+        }
+      }
+    }
+  });
+}
+
+// Workforce Needs
+function renderWorkforceNeeds() {
+  const container = document.getElementById('workforce-needs');
+  if (!container) return;
+
+  const needs = sampleData.workforcePlanning?.languageNeeds || [];
+  
+  container.innerHTML = needs.map(lang => {
+    const gap2026 = lang.needed2026 - lang.current;
+    const gap2027 = lang.needed2027 - lang.current;
+    
+    return `
+      <div class=`workforce-card`>
+        <div class=`workforce-lang`>${lang.language}</div>
+        <div class=`workforce-stats`>
+          <div class=`workforce-stat`>
+            <div class=`workforce-stat-label`>Current</div>
+            <div class=`workforce-stat-value`>${lang.current}</div>
+          </div>
+          <div class=`workforce-stat`>
+            <div class=`workforce-stat-label`>2026</div>
+            <div class=`workforce-stat-value`>${lang.needed2026}</div>
+          </div>
+          <div class=`workforce-stat`>
+            <div class=`workforce-stat-label`>2027</div>
+            <div class=`workforce-stat-value`>${lang.needed2027}</div>
+          </div>
+        </div>
+        <div class=`workforce-gap`>
+          Gap: +${gap2027} hires needed • $${Math.round(gap2027 * lang.cost / 1000)}K investment
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Expansion Timeline
+function renderExpansionTimeline() {
+  const container = document.getElementById('expansion-timeline');
+  if (!container) return;
+
+  const timeline = sampleData.expansionTimeline || [];
+  
+  container.innerHTML = timeline.map(phase => `
+    <div class=`timeline-item ${phase.status}`>
+      <div class=`timeline-header`>
+        <div class=`timeline-phase`>${phase.phase}</div>
+        <div class=`timeline-budget`>$${(phase.budget / 1000).toFixed(0)}K</div>
+      </div>
+      <div class=`timeline-dates`>
+        ${new Date(phase.startDate).toLocaleDateString()} - ${new Date(phase.endDate).toLocaleDateString()}
+      </div>
+      <div class=`timeline-milestones`>
+        ${phase.milestones.map(m => `<div class=`milestone`>${m}</div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Sensitivity Analysis
+function initializeSensitivityAnalysis() {
+  const hireSlider = document.getElementById('hire-slider');
+  const revenueSlider = document.getElementById('revenue-slider');
+  
+  if (hireSlider) {
+    hireSlider.addEventListener('input', updateSensitivityAnalysis);
+  }
+  
+  if (revenueSlider) {
+    revenueSlider.addEventListener('input', updateSensitivityAnalysis);
+  }
+  
+  updateSensitivityAnalysis();
+}
+
+function updateSensitivityAnalysis() {
+  const hireVariance = parseInt(document.getElementById('hire-slider')?.value || 15);
+  const revenueImpact = parseInt(document.getElementById('revenue-slider')?.value || 12);
+  
+  document.getElementById('hire-variance').textContent = `±${hireVariance}%`;
+  document.getElementById('revenue-variance').textContent = `+${revenueImpact}%`;
+  
+  const ctx = document.getElementById('sensitivity-chart');
+  if (!ctx) return;
+  
+  // Destroy existing chart if it exists
+  if (window.sensitivityChartInstance) {
+    window.sensitivityChartInstance.destroy();
+  }
+  
+  const baseHireCost = 75000;
+  const scenarios = [
+    { label: 'Best Case', hireMult: 1 - (hireVariance / 100), revMult: 1 + (revenueImpact / 100) * 1.3 },
+    { label: 'Expected', hireMult: 1, revMult: 1 + (revenueImpact / 100) },
+    { label: 'Worst Case', hireMult: 1 + (hireVariance / 100), revMult: 1 + (revenueImpact / 100) * 0.7 }
+  ];
+  
+  const data = scenarios.map(s => {
+    const cost = baseHireCost * 5 * s.hireMult;
+    const revenue = 500000 * s.revMult;
+    return revenue - cost;
+  });
+  
+  window.sensitivityChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: scenarios.map(s => s.label),
+      datasets: [{
+        label: 'Net Benefit ($)',
+        data: data,
+        backgroundColor: [
+          'rgba(16, 185, 129, 0.8)',
+          'rgba(59, 130, 246, 0.8)',
+          'rgba(239, 68, 68, 0.8)'
+        ],
+        borderColor: [
+          '#10b981',
+          '#3b82f6',
+          '#ef4444'
+        ],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: 'ROI Scenarios Based on Market Variables'
+        },
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Net Benefit (USD)'
+          },
+          ticks: {
+            callback: function(value) {
+              return '$' + (value / 1000).toFixed(0) + 'K';
+            }
+          }
+        }
+      }
+    }
+  });
 }
